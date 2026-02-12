@@ -167,7 +167,7 @@ export default function UserDashboard() {
                     {d.network ? <Wifi className="h-3.5 w-3.5 text-success" /> : <WifiOff className="h-3.5 w-3.5 text-destructive" />}
                     <span className="text-muted-foreground">네트워크</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
+                  {/* <div className="flex items-center gap-1.5">
                     <span className={`font-bold ${d.temp > 45 ? 'text-destructive' : d.temp > 40 ? 'text-warning' : 'text-foreground'}`}>
                       {d.temp}°C
                     </span>
@@ -177,7 +177,7 @@ export default function UserDashboard() {
                     <span className={`font-mono font-semibold ${d.firmware === 'v2.5.0' ? 'text-success' : 'text-warning'}`}>
                       {d.firmware}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold shrink-0 ${
                   d.status === 'normal' ? 'bg-success/10 text-success' : d.status === 'warning' ? 'bg-warning/10 text-warning' : 'bg-destructive/10 text-destructive'
