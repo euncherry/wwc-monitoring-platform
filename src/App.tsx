@@ -9,6 +9,8 @@ import SignUpPage from '@/pages/auth/SignUpPage'
 import { GuestRoute } from '@/components/layout/GuestRoute'
 import { AdminRoute } from '@/components/layout/AdminRoute'
 import { AdminLayout } from '@/components/layout/AdminLayout'
+import { UserRoute } from '@/components/layout/UserRoute'
+import { UserLayout } from '@/components/layout/UserLayout'
 
 /* Admin pages */
 import AdminDashboard from '@/pages/admin/dashboard'
@@ -17,8 +19,11 @@ import TelecoilZonesPage from '@/pages/admin/telecoil-zones'
 import AlertCenterPage from '@/pages/admin/alerts'
 import ActivityLogPage from '@/pages/admin/activity-log'
 
-/* User pages (placeholder) */
+/* User pages */
 import UserDashboard from '@/pages/user/dashboard'
+import UserHearingLoops from '@/pages/user/hearing-loops'
+import UserSettings from '@/pages/user/settings'
+import UserSupport from '@/pages/user/support'
 
 /* ─── Root redirect based on role ─── */
 function RoleRedirect() {
@@ -50,8 +55,15 @@ function App() {
         </Route>
       </Route>
 
-      {/* ─── User routes (placeholder) ─── */}
-      <Route path="/user" element={<UserDashboard />} />
+      {/* ─── User routes ─── */}
+      <Route element={<UserRoute />}>
+        <Route element={<UserLayout />}>
+          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/user/hearing-loops" element={<UserHearingLoops />} />
+          <Route path="/user/settings" element={<UserSettings />} />
+          <Route path="/user/support" element={<UserSupport />} />
+        </Route>
+      </Route>
 
       {/* ─── Root & Fallback ─── */}
       <Route path="/" element={<RoleRedirect />} />
