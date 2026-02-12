@@ -5,7 +5,6 @@ import {
   Bell,
   Clock,
   CheckCircle,
-  Shield,
   Wifi,
   WifiOff,
 } from 'lucide-react'
