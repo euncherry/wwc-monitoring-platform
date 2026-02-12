@@ -11,7 +11,6 @@ import {
   Building2,
   MapPin,
   Radio,
-  ChevronRight,
   ChevronDown,
   ChevronUp,
   X,
@@ -230,7 +229,7 @@ function AlertDetailModal({
 function AlertSettingsModal({ onClose }: { onClose: () => void }) {
   const [tempThreshold, setTempThreshold] = useState(45)
   const [volumeThreshold, setVolumeThreshold] = useState(90)
-  const [disconnectHours, setDisconnectHours] = useState(2)
+  const [disconnectHours] = useState(2)
   const [escalationHours, setEscalationHours] = useState(24)
   const [groupBy, setGroupBy] = useState<'type' | 'institution' | 'none'>('none')
 
@@ -416,13 +415,6 @@ export default function AlertCenterPage() {
     if (activeTab === 'all') return [...alerts]
     return alerts.filter((a) => a.state === activeTab)
   }, [alerts, activeTab])
-
-  /* ── Level counts for inner filter ── */
-  const levelCounts = useMemo(() => {
-    const counts = { all: tabBaseList.length, critical: 0, warning: 0, info: 0 }
-    tabBaseList.forEach((a) => { counts[a.level]++ })
-    return counts
-  }, [tabBaseList])
 
   /* ── Filtered list ── */
   const filteredAlerts = useMemo(() => {

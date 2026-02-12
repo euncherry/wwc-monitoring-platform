@@ -12,19 +12,15 @@ import {
   User,
   Shield,
   Radio,
-  Building2,
-  Bell,
   Pencil,
   PlusCircle,
   Send,
   XCircle,
-  Clock,
-  Activity,
   Terminal,
   ArrowDown,
 } from 'lucide-react'
 import { activityLogs, rawLogs as initialRawLogs, generateNewLogs } from '@/data/activityLogs'
-import type { ActivityLog, ActionType, TargetType, SeverityLevel, RawLog, RawLogLevel } from '@/types/device'
+import type { ActionType, TargetType, SeverityLevel, RawLog, RawLogLevel } from '@/types/device'
 
 /* ══════════════════════════════════════════════════════
    Constants

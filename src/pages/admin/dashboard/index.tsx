@@ -1,12 +1,6 @@
 import {
-  Radio,
-  CheckCircle,
-  Bell,
   Building2,
-  WifiOff,
-  Thermometer,
   ArrowUpRight,
-  ArrowDownRight,
   MoreHorizontal,
   MapPin,
   ChevronRight,
@@ -15,7 +9,6 @@ import {
   Clock,
   ExternalLink,
   Sparkles,
-  TrendingUp,
   Download,
 } from 'lucide-react'
 
@@ -25,104 +18,6 @@ import mapImg from '@/assets/map-view.png'
 /* ══════════════════════════════════════════════════════
    Dummy data
    ══════════════════════════════════════════════════════ */
-
-const kpiCards = [
-  {
-    label: '전체 장비',
-    value: 100,
-    change: '+4',
-    trend: 'up' as const,
-    positive: true,
-    sub: '지난달 96개',
-    icon: Radio,
-    accentColor: 'text-primary',
-    badgeBg: 'bg-primary/8',
-    badgeText: 'text-primary',
-  },
-  {
-    label: '정상 가동',
-    value: 98,
-    change: '+2',
-    trend: 'up' as const,
-    positive: true,
-    sub: '98% 가동률',
-    icon: CheckCircle,
-    accentColor: 'text-success',
-    badgeBg: 'bg-success/8',
-    badgeText: 'text-success',
-  },
-  {
-    label: '미배정 기기',
-    value: 3,
-    change: '-1',
-    trend: 'down' as const,
-    positive: true,
-    sub: '지난주 대비',
-    icon: Package,
-    accentColor: 'text-warning',
-    badgeBg: 'bg-warning/8',
-    badgeText: 'text-warning',
-  },
-  {
-    label: '미확인 알림',
-    value: 3,
-    change: '+2',
-    trend: 'up' as const,
-    positive: false,
-    sub: '처리 대기 중',
-    icon: Bell,
-    accentColor: 'text-destructive',
-    badgeBg: 'bg-destructive/8',
-    badgeText: 'text-destructive',
-  },
-]
-
-const priorityAlerts = [
-  {
-    id: 1,
-    level: 'critical' as const,
-    type: '온도 이상',
-    desc: 'AI 분석을 통해 온도 이상 감지',
-    device: 'HL-0042',
-    zone: '서울시청 민원실',
-    time: '5분 전',
-    progress: '0/1 처리됨',
-    icon: Thermometer,
-  },
-  {
-    id: 2,
-    level: 'warning' as const,
-    type: '연결 끊김',
-    desc: '네트워크 연결 상태 확인 필요',
-    device: 'HL-0078',
-    zone: '부산역 대합실',
-    time: '12분 전',
-    progress: '0/1 처리됨',
-    icon: WifiOff,
-  },
-  {
-    id: 3,
-    level: 'info' as const,
-    type: '펌웨어 업데이트 필요',
-    desc: '최신 펌웨어로 업데이트 권장',
-    device: 'HL-0015',
-    zone: '국립중앙박물관',
-    time: '1시간 전',
-    progress: '1/2 완료',
-    icon: Shield,
-  },
-  {
-    id: 4,
-    level: 'warning' as const,
-    type: '볼륨 이상',
-    desc: '설정 범위 초과 볼륨 감지',
-    device: 'HL-0056',
-    zone: '인천공항 T1',
-    time: '2시간 전',
-    progress: '0/1 처리됨',
-    icon: TrendingUp,
-  },
-]
 
 const firmwareInfo = {
   current: 'v2.4.1',
@@ -172,19 +67,6 @@ function StatusBadge({ status }: { status: 'normal' | 'warning' | 'error' }) {
   )
 }
 
-function AlertLevelBadge({ level }: { level: 'critical' | 'warning' | 'info' }) {
-  const m = {
-    critical: { bg: 'bg-destructive', text: '긴급' },
-    warning: { bg: 'bg-warning', text: '경고' },
-    info: { bg: 'bg-primary', text: '정보' },
-  }
-  const s = m[level]
-  return (
-    <span className={`${s.bg} inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-white leading-none`}>
-      {s.text}
-    </span>
-  )
-}
 
 /* ══════════════════════════════════════════════════════
    Dashboard
