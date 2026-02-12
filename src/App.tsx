@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import { useAuthStore } from '@/stores/authStore'
 
 /* Auth pages */
@@ -37,6 +38,8 @@ function RoleRedirect() {
 
 function App() {
   return (
+    <>
+    <Analytics />
     <Routes>
       {/* ─── Guest routes ─── */}
       <Route element={<GuestRoute />}>
@@ -69,6 +72,7 @@ function App() {
       <Route path="/" element={<RoleRedirect />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </>
   )
 }
 
