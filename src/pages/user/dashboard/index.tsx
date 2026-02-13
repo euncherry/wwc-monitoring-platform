@@ -16,8 +16,7 @@ import bannerImg from "@/assets/banner-illustration.png";
    ══════════════════════════════════════════════════════ */
 
 const myZone = {
-  institutionName: "서울시청",
-  zoneName: "민원실",
+  zoneName: "서울시청",
   totalDevices: 4,
   activeDevices: 4,
   offlineDevices: 0,
@@ -116,7 +115,7 @@ export default function UserDashboard() {
       >
         <div className="relative z-10 max-w-xl">
           <h2 className="text-[clamp(1.375rem,1.1rem+0.8vw,1.625rem)] font-bold text-[#1E293B] mb-2">
-            안녕하세요, {myZone.institutionName} 담당자님!
+            안녕하세요, {myZone.zoneName} 담당자님!
           </h2>
           <p className="text-[clamp(0.8125rem,0.75rem+0.25vw,0.875rem)] text-[#475569] leading-[1.7] max-w-[26rem]">
             {myZone.zoneName}에 설치된 {myZone.totalDevices}개의 히어링루프 중{" "}
@@ -151,7 +150,7 @@ export default function UserDashboard() {
             우리 기관 히어링루프 현황
           </h3>
           <span className="ml-auto text-[12px] text-muted-foreground">
-            {myZone.institutionName} · {myZone.zoneName}
+            {myZone.zoneName}
           </span>
         </div>
 

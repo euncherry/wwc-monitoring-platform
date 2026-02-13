@@ -243,7 +243,7 @@ export default function UserHearingLoops() {
   }))
 
   /* 우리 기관 기기만 필터 */
-  const myDevices = hearingLoops.filter((d) => d.institutionName === MY_INSTITUTION)
+  const myDevices = hearingLoops.filter((d) => d.telecoilZoneName === MY_INSTITUTION)
 
   /* 검색 필터 */
   const filteredDevices = myDevices.filter((d) => {

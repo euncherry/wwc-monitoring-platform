@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react'
 import {
   Search,
   Building2,
-  MapPin,
   Mail,
   User,
   Radio,
@@ -66,7 +65,6 @@ function DeviceStatusBadge({ status }: { status: DeviceStatus }) {
 
 function RegisterModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState({
-    institutionName: '',
     name: '',
     managerEmail: '',
     username: '',
@@ -97,30 +95,15 @@ function RegisterModal({ onClose }: { onClose: () => void }) {
 
         {/* Body */}
         <div className="p-6 space-y-5">
-          {/* 기관명 */}
-          <div>
-            <label className="flex items-center gap-1.5 text-[13px] font-semibold text-foreground mb-2">
-              <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
-              기관명
-            </label>
-            <input
-              type="text"
-              placeholder="예: 서울시청"
-              value={form.institutionName}
-              onChange={(e) => setForm({ ...form, institutionName: e.target.value })}
-              className="w-full rounded-xl border border-border bg-white py-2.5 px-4 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-            />
-          </div>
-
           {/* 텔레코일존명 */}
           <div>
             <label className="flex items-center gap-1.5 text-[13px] font-semibold text-foreground mb-2">
-              <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
+              <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
               텔레코일존명
             </label>
             <input
               type="text"
-              placeholder="예: 민원실"
+              placeholder="예: 서울시청"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full rounded-xl border border-border bg-white py-2.5 px-4 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
@@ -215,10 +198,10 @@ function ZoneDetailModal({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-bold text-foreground">{zone.institutionName}</h3>
+                <h3 className="text-lg font-bold text-foreground">{zone.name}</h3>
                 <ZoneStatusBadge status={zone.status} />
               </div>
-              <p className="text-[12px] text-muted-foreground">{zone.name} · {zone.id}</p>
+              <p className="text-[12px] text-muted-foreground">{zone.id}</p>
             </div>
           </div>
           <button onClick={onClose} className="rounded-lg p-2 text-muted-foreground hover:bg-page hover:text-foreground transition-colors">
@@ -268,8 +251,7 @@ function ZoneDetailModal({
             <div className="space-y-4">
               <div className="rounded-xl border border-border divide-y divide-border/50">
                 {[
-                  { label: '기관명', value: zone.institutionName, icon: Building2 },
-                  { label: '텔레코일존명', value: zone.name, icon: MapPin },
+                  { label: '텔레코일존명', value: zone.name, icon: Building2 },
                   { label: '등록일', value: zone.registeredAt, icon: Shield },
                   { label: '최근 업데이트', value: zone.lastUpdated, icon: Shield },
                 ].map((row) => (
@@ -497,7 +479,6 @@ export default function TelecoilZonesPage() {
       const q = search.toLowerCase()
       list = list.filter(
         (z) =>
-          z.institutionName.toLowerCase().includes(q) ||
           z.name.toLowerCase().includes(q) ||
           z.id.toLowerCase().includes(q) ||
           z.managerEmail.toLowerCase().includes(q),
@@ -531,7 +512,7 @@ export default function TelecoilZonesPage() {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="기관명, 텔레코일존명, ID, 이메일 검색..."
+            placeholder="텔레코일존명, ID, 이메일 검색..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-xl border border-border bg-white py-2.5 pl-10 pr-4 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
@@ -606,18 +587,14 @@ export default function TelecoilZonesPage() {
                     className={`rounded-xl border ${borderAccent} bg-white p-5 cursor-pointer transition-all hover:shadow-lg hover:-translate-y-0.5 group`}
                     onClick={() => setSelectedZone(zone)}
                   >
-                    {/* Header: 기관명 + 상태 */}
+                    {/* Header: 텔레코일존명 + 상태 */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 shrink-0">
                           <Building2 className="h-5 w-5 text-primary" />
                         </div>
                         <div className="min-w-0">
-                          <p className="text-[14px] font-bold text-foreground truncate">{zone.institutionName}</p>
-                          <p className="text-[12px] text-muted-foreground flex items-center gap-1 mt-0.5">
-                            <MapPin className="h-3 w-3 shrink-0" />
-                            <span className="truncate">{zone.name}</span>
-                          </p>
+                          <p className="text-[14px] font-bold text-foreground truncate">{zone.name}</p>
                         </div>
                       </div>
                       <ZoneStatusBadge status={zone.status} />

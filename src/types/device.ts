@@ -12,7 +12,6 @@ export interface HearingLoop {
   status: DeviceStatus
   telecoilZoneId: string | null
   telecoilZoneName: string | null
-  institutionName: string | null
   lastUpdated: string
   registeredAt: string
   alerts: AlertHistory[]
@@ -39,7 +38,6 @@ export interface SystemAlert {
   deviceMac: string
   telecoilZoneId: string | null
   telecoilZoneName: string | null
-  institutionName: string | null
   state: AlertState
   createdAt: string
   processedAt: string | null
@@ -77,7 +75,6 @@ export type ZoneStatus = 'active' | 'warning' | 'inactive'
 export interface TelecoilZone {
   id: string
   name: string
-  institutionName: string
   managerEmail: string
   userAccount: { id: string; username: string } | null
   status: ZoneStatus

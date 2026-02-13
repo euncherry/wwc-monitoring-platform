@@ -33,12 +33,12 @@ const unassignedDevices = [
 ]
 
 const telecoilZoneSummary = [
-  { name: '서울시청', zone: '민원실', total: 8, active: 8, status: 'normal' as const },
-  { name: '부산역', zone: '대합실', total: 6, active: 5, status: 'warning' as const },
-  { name: '국립중앙박물관', zone: '전시관 1관', total: 12, active: 12, status: 'normal' as const },
-  { name: '인천공항', zone: 'T1 출국장', total: 10, active: 10, status: 'normal' as const },
-  { name: '대전시청', zone: '종합상황실', total: 4, active: 3, status: 'error' as const },
-  { name: '광주광역시청', zone: '민원실', total: 6, active: 6, status: 'normal' as const },
+  { name: '서울시청', total: 8, active: 8, status: 'normal' as const },
+  { name: '부산역', total: 6, active: 5, status: 'warning' as const },
+  { name: '국립중앙박물관', total: 12, active: 12, status: 'normal' as const },
+  { name: '인천공항', total: 10, active: 10, status: 'normal' as const },
+  { name: '대전시청', total: 4, active: 3, status: 'error' as const },
+  { name: '광주광역시청', total: 6, active: 6, status: 'normal' as const },
 ]
 
 const recentActivities = [
@@ -176,7 +176,6 @@ export default function AdminDashboard() {
               <table className="w-full h-full">
                 <thead>
                   <tr className="bg-page/50">
-                    <th className="px-6 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">기관명</th>
                     <th className="px-6 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">텔레코일존</th>
                     <th className="px-6 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">장비수</th>
                     <th className="px-6 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">가동</th>
@@ -193,9 +192,6 @@ export default function AdminDashboard() {
                     >
                       <td className="px-6 py-4">
                         <span className="text-[13px] font-semibold text-foreground">{zone.name}</span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="text-[13px] text-muted-foreground">{zone.zone}</span>
                       </td>
                       <td className="px-6 py-4 text-center">
                         <span className="text-[13px] font-semibold text-foreground">{zone.total}</span>

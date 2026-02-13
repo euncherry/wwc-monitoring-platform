@@ -9,7 +9,6 @@ import {
   WifiOff,
   Shield,
   Building2,
-  MapPin,
   Radio,
   ChevronDown,
   ChevronUp,
@@ -151,15 +150,6 @@ function AlertDetailModal({
             <div className="flex items-center justify-between px-4 py-3">
               <div className="flex items-center gap-2.5">
                 <Building2 className="h-4 w-4 text-muted-foreground" />
-                <span className="text-[13px] text-muted-foreground">기관</span>
-              </div>
-              <span className={`text-[13px] font-semibold ${alert.institutionName ? 'text-foreground' : 'text-warning'}`}>
-                {alert.institutionName ?? '미배정'}
-              </span>
-            </div>
-            <div className="flex items-center justify-between px-4 py-3">
-              <div className="flex items-center gap-2.5">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
                 <span className="text-[13px] text-muted-foreground">텔레코일존</span>
               </div>
               <span className={`text-[13px] font-semibold ${alert.telecoilZoneName ? 'text-foreground' : 'text-warning'}`}>
@@ -328,7 +318,7 @@ function AlertSettingsModal({ onClose }: { onClose: () => void }) {
               {([
                 { key: 'none' as const, label: '그룹 없음', desc: '개별 표시' },
                 { key: 'type' as const, label: '유형별', desc: '동일 유형 묶기' },
-                { key: 'institution' as const, label: '기관별', desc: '같은 기관 묶기' },
+                { key: 'institution' as const, label: '텔레코일존별', desc: '같은 텔레코일존 묶기' },
               ]).map((opt) => (
                 <button
                   key={opt.key}
@@ -430,7 +420,6 @@ export default function AlertCenterPage() {
           a.id.toLowerCase().includes(q) ||
           a.deviceId.toLowerCase().includes(q) ||
           a.message.toLowerCase().includes(q) ||
-          a.institutionName?.toLowerCase().includes(q) ||
           a.telecoilZoneName?.toLowerCase().includes(q) ||
           a.type.toLowerCase().includes(q),
       )
@@ -556,7 +545,7 @@ export default function AlertCenterPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
             <input
               type="text"
-              placeholder="알림 메시지, 기관명, 디바이스 ID로 검색"
+              placeholder="알림 메시지, 텔레코일존, 디바이스 ID로 검색"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full rounded-lg border border-border bg-white py-2 pl-9 pr-3 text-[12px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
@@ -643,7 +632,7 @@ export default function AlertCenterPage() {
                 <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">유형</th>
                 <th className="px-5 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">우선순위</th>
                 <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">알림 메시지</th>
-                <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">기관/디바이스</th>
+                <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">텔레코일존/디바이스</th>
                 <th className="px-5 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">상태</th>
                 <th className="px-5 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-primary-dark/70">작업</th>
               </tr>
@@ -688,9 +677,9 @@ export default function AlertCenterPage() {
                           <p className="text-[10px] text-muted-foreground mt-0.5">{alert.telecoilZoneName}</p>
                         )}
                       </td>
-                      {/* 기관/디바이스 */}
+                      {/* 텔레코일존/디바이스 */}
                       <td className="px-5 py-3.5">
-                        <p className="text-[12px] font-semibold text-foreground">{alert.institutionName ?? '미배정'}</p>
+                        <p className="text-[12px] font-semibold text-foreground">{alert.telecoilZoneName ?? '미배정'}</p>
                         <p className="text-[10px] text-muted-foreground font-mono">{alert.deviceId}</p>
                       </td>
                       {/* 상태 */}

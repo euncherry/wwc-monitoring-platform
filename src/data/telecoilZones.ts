@@ -3,12 +3,11 @@ import type { TelecoilZone } from '@/types/device'
 export const telecoilZones: TelecoilZone[] = [
   {
     id: 'tz-01',
-    name: '민원실',
-    institutionName: '서울시청',
+    name: '서울시청',
     managerEmail: 'admin@seoul.go.kr',
     userAccount: { id: 'u-01', username: 'seoul_user' },
     status: 'active',
-    deviceCount: 3,
+    deviceCount: 4,
     activeDeviceCount: 3,
     registeredAt: '2024-06-15',
     lastUpdated: '2025-01-20 14:30',
@@ -16,8 +15,7 @@ export const telecoilZones: TelecoilZone[] = [
   },
   {
     id: 'tz-02',
-    name: '대합실',
-    institutionName: '부산역',
+    name: '부산역',
     managerEmail: 'station@busan.kr',
     userAccount: { id: 'u-02', username: 'busan_station' },
     status: 'warning',
@@ -33,8 +31,7 @@ export const telecoilZones: TelecoilZone[] = [
   },
   {
     id: 'tz-03',
-    name: '전시관 1관',
-    institutionName: '국립중앙박물관',
+    name: '국립중앙박물관',
     managerEmail: 'tech@museum.go.kr',
     userAccount: { id: 'u-03', username: 'museum_user' },
     status: 'active',
@@ -46,8 +43,7 @@ export const telecoilZones: TelecoilZone[] = [
   },
   {
     id: 'tz-04',
-    name: 'T1 출국장',
-    institutionName: '인천공항',
+    name: '인천공항',
     managerEmail: 'ops@airport.kr',
     userAccount: { id: 'u-04', username: 'icn_airport' },
     status: 'active',
@@ -59,8 +55,7 @@ export const telecoilZones: TelecoilZone[] = [
   },
   {
     id: 'tz-05',
-    name: '종합상황실',
-    institutionName: '대전시청',
+    name: '대전시청',
     managerEmail: 'control@daejeon.go.kr',
     userAccount: { id: 'u-05', username: 'daejeon_user' },
     status: 'warning',
@@ -75,8 +70,7 @@ export const telecoilZones: TelecoilZone[] = [
   },
   {
     id: 'tz-06',
-    name: '민원실',
-    institutionName: '광주광역시청',
+    name: '광주광역시청',
     managerEmail: 'welfare@gwangju.go.kr',
     userAccount: null,
     status: 'active',

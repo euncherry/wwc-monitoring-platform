@@ -241,7 +241,7 @@ function DeviceDetailModal({
           <div className="rounded-xl border border-border divide-y divide-border/50">
             {[
               { label: '펌웨어 버전', value: device.firmwareVersion, icon: Shield },
-              { label: '배치된 텔레코일존', value: device.telecoilZoneName ? `${device.institutionName} — ${device.telecoilZoneName}` : '미배정', icon: MapPin },
+              { label: '배치된 텔레코일존', value: device.telecoilZoneName ?? '미배정', icon: MapPin },
               { label: 'MAC 주소', value: device.mac, icon: Hash },
               { label: '최근 업데이트', value: device.lastUpdated, icon: Activity },
             ].map((row) => (
@@ -352,7 +352,6 @@ export default function HearingLoopsPage() {
       list = list.filter(
         (d) =>
           d.id.toLowerCase().includes(q) ||
-          d.institutionName?.toLowerCase().includes(q) ||
           d.telecoilZoneName?.toLowerCase().includes(q) ||
           d.mac.toLowerCase().includes(q),
       )
@@ -460,7 +459,7 @@ export default function HearingLoopsPage() {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="기기 ID, 기관명, 텔레코일존, MAC 주소 검색..."
+            placeholder="기기 ID, 텔레코일존, MAC 주소 검색..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full rounded-xl border border-border bg-white py-2.5 pl-10 pr-4 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
@@ -539,7 +538,7 @@ export default function HearingLoopsPage() {
                 )}
                 <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">기기 ID</th>
                 {activeTab !== 'unassigned' && (
-                  <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">기관 / 텔레코일존</th>
+                  <th className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">텔레코일존</th>
                 )}
                 <th className="px-5 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">전원</th>
                 <th className="px-5 py-3 text-center text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">네트워크</th>
@@ -596,10 +595,9 @@ export default function HearingLoopsPage() {
                     </td>
                     {activeTab !== 'unassigned' && (
                       <td className="px-5 py-3.5">
-                        {device.institutionName ? (
+                        {device.telecoilZoneName ? (
                           <div>
-                            <p className="text-[13px] font-semibold text-foreground">{device.institutionName}</p>
-                            <p className="text-[11px] text-muted-foreground">{device.telecoilZoneName}</p>
+                            <p className="text-[13px] font-semibold text-foreground">{device.telecoilZoneName}</p>
                           </div>
                         ) : (
                           <span className="text-[12px] text-warning font-semibold">미배정</span>
