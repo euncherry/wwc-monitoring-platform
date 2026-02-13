@@ -18,7 +18,6 @@ interface InstitutionInfo {
   name: string
   address: string
   phone: string
-  zoneName: string
 }
 
 interface ManagerInfo {
@@ -31,7 +30,6 @@ const initialInstitution: InstitutionInfo = {
   name: '서울시청',
   address: '서울특별시 중구 세종대로 110',
   phone: '02-120',
-  zoneName: '민원실',
 }
 
 const initialManager: ManagerInfo = {
@@ -194,28 +192,6 @@ export default function UserSettings() {
       )}
 
       <div className="grid grid-cols-2 gap-6">
-        {/* ─── 담당자 정보 ─── */}
-        <div className="rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-              <User className="h-4 w-4 text-primary" />
-            </div>
-            <h3 className="text-[15px] font-bold text-foreground">담당자 정보</h3>
-          </div>
-          <div className="px-6 divide-y divide-border/50">
-            <ReadOnlyField label="담당자 이름" value={manager.name} icon={User} />
-            <EditableField
-              label="이메일"
-              value={manager.email}
-              icon={Mail}
-              onSave={(val) => updateManager('email', val)}
-              placeholder="이메일을 입력하세요"
-              type="email"
-            />
-            <ReadOnlyField label="부서" value={manager.department} icon={Building2} />
-          </div>
-        </div>
-
         {/* ─── 기관 정보 ─── */}
         <div className="rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
           <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border">
@@ -241,14 +217,35 @@ export default function UserSettings() {
               placeholder="전화번호를 입력하세요"
               type="tel"
             />
-            <ReadOnlyField label="텔레코일존" value={institution.zoneName} icon={MapPin} />
+          </div>
+        </div>
+
+        {/* ─── 담당자 정보 ─── */}
+        <div className="rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
+          <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+              <User className="h-4 w-4 text-primary" />
+            </div>
+            <h3 className="text-[15px] font-bold text-foreground">담당자 정보</h3>
+          </div>
+          <div className="px-6 divide-y divide-border/50">
+            <ReadOnlyField label="담당자 이름" value={manager.name} icon={User} />
+            <EditableField
+              label="이메일"
+              value={manager.email}
+              icon={Mail}
+              onSave={(val) => updateManager('email', val)}
+              placeholder="이메일을 입력하세요"
+              type="email"
+            />
+            <ReadOnlyField label="부서" value={manager.department} icon={Building2} />
           </div>
         </div>
       </div>
 
       {/* ─── 안내 문구 ─── */}
       <div className="rounded-xl bg-page/50 border border-border/50 px-5 py-3 text-[12px] text-muted-foreground">
-        기관명, 담당자 이름, 부서, 텔레코일존 정보는 관리자에게 문의하여 변경할 수 있습니다.
+        기관명, 담당자 이름, 부서 정보는 관리자에게 문의하여 변경할 수 있습니다.
       </div>
     </div>
   )
