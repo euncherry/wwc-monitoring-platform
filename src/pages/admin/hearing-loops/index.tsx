@@ -20,6 +20,8 @@ import {
   Trash2,
   ArrowUpDown,
   RefreshCw,
+  Pencil,
+  CheckCircle2,
 } from 'lucide-react'
 import { hearingLoops } from '@/data/hearingLoops'
 import type { HearingLoop, DeviceStatus } from '@/types/device'
@@ -79,13 +81,19 @@ function NetworkIcon({ connected }: { connected: boolean }) {
 
 function DeviceDetailModal({
   device,
+  nickname,
   onClose,
+  onSaveNickname,
 }: {
   device: HearingLoop
+  nickname: string
   onClose: () => void
+  onSaveNickname: (id: string, name: string) => void
 }) {
   const [localPower, setLocalPower] = useState(device.power)
   const [localVolume, setLocalVolume] = useState(device.volume)
+  const [editingNickname, setEditingNickname] = useState(false)
+  const [tempNickname, setTempNickname] = useState(nickname)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4" onClick={onClose}>
@@ -100,7 +108,10 @@ function DeviceDetailModal({
               <Radio className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-foreground">{device.id}</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-lg font-bold text-foreground">{nickname}</h3>
+                <span className="rounded-md bg-page px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">{device.id}</span>
+              </div>
               <p className="text-[12px] text-muted-foreground font-mono">{device.mac}</p>
             </div>
           </div>
@@ -114,6 +125,52 @@ function DeviceDetailModal({
 
         {/* Body */}
         <div className="p-6 space-y-6">
+          {/* 별칭 편집 */}
+          <div className="rounded-xl border border-primary/20 bg-primary/3 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[12px] font-semibold text-primary">히어링루프 별칭</span>
+              {!editingNickname && (
+                <button
+                  onClick={() => setEditingNickname(true)}
+                  className="flex items-center gap-1 text-[11px] font-semibold text-primary hover:text-primary-dark transition-colors"
+                >
+                  <Pencil className="h-3 w-3" />
+                  수정
+                </button>
+              )}
+            </div>
+            {editingNickname ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={tempNickname}
+                  onChange={(e) => setTempNickname(e.target.value)}
+                  placeholder="별칭을 입력하세요"
+                  className="flex-1 rounded-lg border border-primary/30 bg-white px-3 py-2 text-[13px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') { onSaveNickname(device.id, tempNickname.trim() || device.id); setEditingNickname(false) }
+                    if (e.key === 'Escape') { setTempNickname(nickname); setEditingNickname(false) }
+                  }}
+                />
+                <button
+                  onClick={() => { onSaveNickname(device.id, tempNickname.trim() || device.id); setEditingNickname(false) }}
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
+                >
+                  <CheckCircle2 className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => { setTempNickname(nickname); setEditingNickname(false) }}
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground hover:bg-page transition-colors"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            ) : (
+              <p className="text-[14px] font-bold text-foreground">{nickname}</p>
+            )}
+          </div>
+
           {/* Info grid */}
           <div className="grid grid-cols-2 gap-4">
             {/* 전원 상태 — 제어 가능 */}
@@ -260,6 +317,12 @@ export default function HearingLoopsPage() {
   const [sortOrder, setSortOrder] = useState<'latest' | 'oldest'>('latest')
   const [selectedDevice, setSelectedDevice] = useState<HearingLoop | null>(null)
   const [otaSelected, setOtaSelected] = useState<Set<string>>(new Set())
+  const [nicknames, setNicknames] = useState<Record<string, string>>({})
+
+  const getNickname = (id: string) => nicknames[id] || id
+  const handleSaveNickname = (id: string, name: string) => {
+    setNicknames((prev) => ({ ...prev, [id]: name }))
+  }
 
   /* ── Tab-based list (before status filter) ── */
   const tabBaseList = useMemo(() => {
@@ -521,7 +584,12 @@ export default function HearingLoopsPage() {
                           {!device.telecoilZoneId ? <Package className="h-4 w-4 text-warning" /> : <Radio className="h-4 w-4 text-primary" />}
                         </div>
                         <div>
-                          <p className="text-[13px] font-bold text-foreground">{device.id}</p>
+                          <div className="flex items-center gap-1.5">
+                            <p className="text-[13px] font-bold text-foreground">{getNickname(device.id)}</p>
+                            {nicknames[device.id] && (
+                              <span className="rounded bg-page px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">{device.id}</span>
+                            )}
+                          </div>
                           <p className="text-[11px] text-muted-foreground font-mono">{device.mac}</p>
                         </div>
                       </div>
@@ -586,7 +654,7 @@ export default function HearingLoopsPage() {
 
       {/* ─── Detail Modal ─── */}
       {selectedDevice && (
-        <DeviceDetailModal device={selectedDevice} onClose={() => setSelectedDevice(null)} />
+        <DeviceDetailModal device={selectedDevice} nickname={getNickname(selectedDevice.id)} onClose={() => setSelectedDevice(null)} onSaveNickname={handleSaveNickname} />
       )}
     </div>
   )

@@ -344,7 +344,7 @@ export default function UserHearingLoops() {
           </div>
         ) : (
           filteredDevices.map((device) => {
-            const nick = nicknames[device.id]
+            const nick = nicknames[device.id] || device.id
             return (
               <div
                 key={device.id}
@@ -375,12 +375,10 @@ export default function UserHearingLoops() {
                 {/* 기기 정보 */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <p className="text-[15px] font-bold text-foreground">{device.id}</p>
-                    {nick && (
-                      <span className="rounded-md bg-primary/8 px-2 py-0.5 text-[11px] font-semibold text-primary">
-                        {nick}
-                      </span>
-                    )}
+                    <p className="text-[15px] font-bold text-foreground">{nick}</p>
+                    <span className="rounded-md bg-page px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+                      {device.id}
+                    </span>
                   </div>
                   <p className="text-[12px] text-muted-foreground">
                     {device.telecoilZoneName ?? '—'} · <span className="font-mono">{device.mac}</span>
@@ -446,7 +444,7 @@ export default function UserHearingLoops() {
       {selectedDevice && (
         <DeviceDetailModal
           device={selectedDevice}
-          nickname={nicknames[selectedDevice.id] ?? ''}
+          nickname={nicknames[selectedDevice.id] || selectedDevice.id}
           onClose={() => setSelectedDevice(null)}
           onSaveNickname={handleSaveNickname}
         />
