@@ -18,8 +18,8 @@ import bannerImg from "@/assets/banner-illustration.png";
 const myZone = {
   institutionName: "서울시청",
   zoneName: "민원실",
-  totalDevices: 3,
-  activeDevices: 3,
+  totalDevices: 4,
+  activeDevices: 4,
   offlineDevices: 0,
   warningDevices: 0,
 };
@@ -76,6 +76,15 @@ const deviceList = [
     power: true,
     network: true,
     temp: 35,
+    firmware: "v2.5.0",
+  },
+  {
+    id: "HL-0044",
+    nickname: "",
+    status: "normal" as const,
+    power: true,
+    network: true,
+    temp: 34,
     firmware: "v2.5.0",
   },
 ];

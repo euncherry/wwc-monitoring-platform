@@ -20,6 +20,12 @@ export const hearingLoops: HearingLoop[] = [
     lastUpdated: '2025-01-20 14:25', registeredAt: '2024-07-01', alerts: [],
   },
   {
+    id: 'HL-0004', mac: 'A4:CF:12:6B:3A:04', power: true, operating: true, networkConnected: true,
+    temperature: 34, volume: 68, firmwareVersion: 'v2.5.0', status: 'normal',
+    telecoilZoneId: 'tz-01', telecoilZoneName: '민원실', institutionName: '서울시청',
+    lastUpdated: '2025-01-20 14:22', registeredAt: '2025-01-08', alerts: [],
+  },
+  {
     id: 'HL-0010', mac: 'A4:CF:12:6B:3A:10', power: true, operating: true, networkConnected: true,
     temperature: 35, volume: 68, firmwareVersion: 'v2.4.1', status: 'normal',
     telecoilZoneId: 'tz-02', telecoilZoneName: '대합실', institutionName: '부산역',
