@@ -194,7 +194,7 @@ export default function UserSettings() {
       <div className="grid grid-cols-2 gap-6">
         {/* ─── 기관 정보 ─── */}
         <div className="rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border">
+          <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border bg-page/40">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
               <Building2 className="h-4 w-4 text-primary" />
             </div>
@@ -222,7 +222,7 @@ export default function UserSettings() {
 
         {/* ─── 담당자 정보 ─── */}
         <div className="rounded-2xl border border-border bg-white shadow-sm overflow-hidden">
-          <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border">
+          <div className="flex items-center gap-2.5 px-6 py-4 border-b border-border bg-page/40">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
               <User className="h-4 w-4 text-primary" />
             </div>
