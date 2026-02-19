@@ -2,6 +2,8 @@
 
 공공시설에 설치된 히어링루프 장비의 상태를 실시간으로 모니터링하고 관리하는 웹 기반 플랫폼입니다.
 
+**배포 URL** : https://wwc-monitoring-platform.vercel.app
+
 ---
 
 ## 사용자 역할
